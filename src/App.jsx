@@ -9,24 +9,31 @@ import Weather from "./Components/weathercondition/Weather";
 function App() {
   const [activities, setActivities] = useLocalStorage("activities", []);
   const [weather, setWeather] = useState("");
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState({
+    temperature: "Loading...",
+    condition: "⏳ ",
+    isGoodWeather: true,
+  });
 
   const apiURL = "https://example-apis.vercel.app/api/weather";
 
   async function fetchWeatherData() {
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    setWeatherData(data);
-    setWeather(data.isGoodWeather);
+    try {
+      const response = await fetch(apiURL);
+      const data = await response.json();
+      setWeatherData(data);
+      setWeather(data.isGoodWeather);
+    } catch (error) {
+      console.log("error");
+    }
   }
 
   useEffect(() => {
-    fetchWeatherData();
-    const intervalId = setTimeout(fetchWeatherData, 2000);
-    () => {
-      setInterval(intervalId);
+    const intervalId = setInterval(fetchWeatherData, 1000);
+    return () => {
+      clearInterval(intervalId);
     };
-  });
+  }, []);
 
   const goodWeatherList = activities.filter(
     (activity) => activity.isForGoodWeather === weather
@@ -42,10 +49,13 @@ function App() {
 
   return (
     <>
-      <Weather
-        temperature={weatherData.temperature}
-        condition={weatherData.condition}
-      />
+      <header>
+        <Weather
+          temperature={weatherData.temperature}
+          condition={weatherData.condition}
+          weatherMood={weatherData.isGoodWeather}
+        />
+      </header>
       <List
         activities={goodWeatherList}
         isGoodWeather={weather}

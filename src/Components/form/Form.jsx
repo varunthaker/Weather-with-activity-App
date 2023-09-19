@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import { Fragment } from "react";
+
+import "./form.css";
 export default function Form({ OnAddActvities }) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,18 +15,17 @@ export default function Form({ OnAddActvities }) {
     event.target.elements.activity_text.focus();
   }
   return (
-    <Fragment>
+    <div className="form-component">
       <h2>Activities</h2>
-      <form onSubmit={() => handleSubmit(event)}>
+      <form className="form" onSubmit={() => handleSubmit(event)}>
         <label htmlFor="activity_text">Activity Name:</label>
-        <br />
         <input id="activity_text" name="activity_text" type="text"></input>
-        <br />
         <label htmlFor="isGoodWeather">Good weather activity:</label>
         <input name="isGoodWeather" id="isGoodWeather" type="checkbox"></input>
-        <br />
-        <button type="submit">Submit</button>
+        <button className="submit" type="submit">
+          Submit
+        </button>
       </form>
-    </Fragment>
+    </div>
   );
 }
