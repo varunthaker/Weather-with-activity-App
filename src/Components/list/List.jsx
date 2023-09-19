@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-const List = ({ activities, isGoodWeather }) => {
+const List = ({ activities, isGoodWeather, onDelete }) => {
   const goodWeatherString = "The Weather is Awesome! Go outside and:";
   const badWeatherString = "Bad Weather outside! Here's what you can do now:";
 
@@ -13,7 +13,12 @@ const List = ({ activities, isGoodWeather }) => {
       )}
       <ul>
         {activities?.map((activity) => (
-          <li key={activity.id}>{activity.name}</li>
+          <li key={activity.id}>
+            {activity.name}
+            <button type="submit" onClick={() => onDelete(activity.id)}>
+              x
+            </button>
+          </li>
         ))}
       </ul>
     </Fragment>
