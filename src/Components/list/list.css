@@ -1,0 +1,28 @@
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+li {
+  width: auto;
+  height: 30px;
+  list-style: none;
+  background-color: #ffe8d8;
+  color: #0a1f4e;
+  position: relative;
+  border-radius: 10px;
+  font-size: larger;
+}
+
+.delete {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 2px;
+  right: 20px;
+  background-color: transparent;
+}
