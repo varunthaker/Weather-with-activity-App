@@ -46,7 +46,7 @@ function App() {
   );
 
   function handleAddActivities(activity: Activity) {
-    setActivities([...activities, { ...activity, id: uid() }]);
+    setActivities([...activities, { ...activity }]);
   }
 
   function handleDeleteActivities(id: string) {
