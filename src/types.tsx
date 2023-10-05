@@ -7,6 +7,6 @@ export interface WeatherData {
 
 export interface Activity {
   name: string;
-  id?: string;
+  id: string;
   isForGoodWeather: boolean;
 }

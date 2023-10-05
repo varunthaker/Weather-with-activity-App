@@ -8,18 +8,18 @@ interface FormProps {
 }
 
 import "./form.css";
+import { uid } from "uid";
 export default function Form({ onAddActivities }: FormProps) {
-  function handleSubmit(event: any) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formElement = event.target;
+    const formElement = event.currentTarget;
     const data: Activity = {
       name: formElement.activity_text.value,
       isForGoodWeather: formElement.isGoodWeather.checked,
+      id: uid(),
     };
     onAddActivities(data);
-
-    event.target.reset();
-    event.target.elements.activity_text.focus();
+    formElement.reset();
   }
   return (
     <div className="form-component">
