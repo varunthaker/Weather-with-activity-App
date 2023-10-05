@@ -1,5 +1,12 @@
 import "./weather.css";
-const Weather = ({ temperature, condition, weatherMood }) => {
+
+interface WeatherProps {
+  temperature: number | string;
+  condition: string;
+  weatherMood: boolean;
+}
+
+const Weather = ({ temperature, condition, weatherMood }: WeatherProps) => {
   const weatherMoodClass = weatherMood ? "weather-good" : "weather-bad";
 
   return (
