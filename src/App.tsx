@@ -5,13 +5,19 @@ import { uid } from "uid";
 import List from "./Components/list/List";
 import useLocalStorage from "use-local-storage";
 import Weather from "./Components/weathercondition/Weather";
+import { WeatherData } from "./types";
+import { Activity } from "./types";
 
 function App() {
-  const [activities, setActivities] = useLocalStorage("activities", []);
-  const [weather, setWeather] = useState("");
-  const [weatherData, setWeatherData] = useState({
+  const [activities, setActivities] = useLocalStorage<Activity[]>(
+    "activities",
+    []
+  );
+  const [weather, setWeather] = useState<boolean>();
+  const [weatherData, setWeatherData] = useState<WeatherData>({
+    location: "",
     temperature: "Loading...",
-    condition: "⏳ ",
+    condition: "⏳",
     isGoodWeather: true,
   });
 
@@ -39,11 +45,11 @@ function App() {
     (activity) => activity.isForGoodWeather === weather
   );
 
-  function handleAddActivities(activity) {
+  function handleAddActivities(activity: Activity) {
     setActivities([...activities, { ...activity, id: uid() }]);
   }
 
-  function handleDeleteActivities(id) {
+  function handleDeleteActivities(id: string) {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
@@ -61,7 +67,7 @@ function App() {
         isGoodWeather={weather}
         onDelete={handleDeleteActivities}
       />
-      <Form OnAddActvities={handleAddActivities} />
+      <Form onAddActivities={handleAddActivities} />
     </>
   );
 }

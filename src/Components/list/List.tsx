@@ -1,7 +1,14 @@
 import { Fragment } from "react";
 import "./list.css";
+import { Activity } from "../../types";
 
-const List = ({ activities, isGoodWeather, onDelete }) => {
+interface ListProps {
+  activities: Activity[];
+  isGoodWeather: boolean | undefined;
+  onDelete: (id: string) => void;
+}
+
+const List = ({ activities, isGoodWeather, onDelete }: ListProps) => {
   const goodWeatherString =
     "The Weather is Awesome 🕶️ ! Go outside and 🚵 ⚽: ";
   const badWeatherString =
@@ -23,7 +30,7 @@ const List = ({ activities, isGoodWeather, onDelete }) => {
                 <button
                   className="delete"
                   type="submit"
-                  onClick={() => onDelete(activity.id)}
+                  onClick={() => onDelete(activity.id as string)}
                 >
                   ❌
                 </button>

@@ -1,15 +1,22 @@
 /* eslint-disable react/prop-types */
+import { FormEvent } from "react";
+import { Activity } from "../../types";
+import { WeatherData } from "../../types";
+
+interface FormProps {
+  onAddActivities: (activitity: Activity) => void;
+}
 
 import "./form.css";
-export default function Form({ OnAddActvities }) {
-  function handleSubmit(event) {
+export default function Form({ onAddActivities }: FormProps) {
+  function handleSubmit(event: any) {
     event.preventDefault();
     const formElement = event.target;
-    const data = {
+    const data: Activity = {
       name: formElement.activity_text.value,
       isForGoodWeather: formElement.isGoodWeather.checked,
     };
-    OnAddActvities(data);
+    onAddActivities(data);
 
     event.target.reset();
     event.target.elements.activity_text.focus();
@@ -17,7 +24,7 @@ export default function Form({ OnAddActvities }) {
   return (
     <div className="form-component">
       <h2>Activities</h2>
-      <form className="form" onSubmit={() => handleSubmit(event)}>
+      <form className="form" onSubmit={(event) => handleSubmit(event)}>
         <label htmlFor="activity_text">Activity Name:</label>
         <input id="activity_text" name="activity_text" type="text"></input>
         <label htmlFor="isGoodWeather">Good weather activity:</label>
